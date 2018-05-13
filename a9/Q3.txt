@@ -1,0 +1,38 @@
+time ./tRead 1
+1
+
+real	0m0.016s
+user	0m0.004s
+sys	0m0.009s
+
+time ./tRead 10
+71
+
+real	0m0.015s
+user	0m0.004s
+sys	0m0.009s
+
+time ./tRead 100
+1466043
+
+real	0m0.021s
+user	0m0.005s
+sys	0m0.014s
+
+time ./tRead 1000
+2463576363942
+
+real	0m0.070s
+user	0m0.009s
+sys	0m0.057s
+
+time ./aRead 100000
+43336006473246280
+
+real	0m0.184s
+user	0m0.069s
+sys	0m0.109s
+
+OBSERVATION: running time is more or less the same as aRead, and grows significantly slower than sRead with an increase in numBlocks.
+
+EXPLANATION: the CPU can spawn multiple threads in parallel as it iterates through the number of blocks. Each thread can thus schedule a disk read, and block itself when the read is complete. Once interrupted, each thread can handle the read accordingly and add to the sum individually, and threads are joined to wait until all threads are complete before terminating the program. Unlike sRead, the CPU does not have to wait for each disk read is complete before adding to the sum, which is similar to aRead.

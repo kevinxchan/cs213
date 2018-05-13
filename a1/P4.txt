@@ -1,0 +1,13 @@
+Tests expecting same outputs regardless of endianness:
+Endianness 0 0 0 0
+Endianness ff ff ff ff
+Endianness ff 0 0 ff
+
+Tests with bit eight set to 1:
+Endianness ff 0 0 0
+Endianness 0 0 0 ff
+
+Test with expected different outputs:
+Endianness ff 2 3 4
+Endianness ff 0 0 0
+

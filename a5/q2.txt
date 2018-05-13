@@ -1,0 +1,1 @@
+The problem was with the transition between popping the value, "B", and pushing the value "C". In pop, free(e) is called before returning the char* e->name, resulting in a dangling pointer.

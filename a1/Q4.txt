@@ -1,0 +1,4 @@
+Since the computer is using an Intel Core i7 processor, it will store the two 4 byte integers using little endian. Since the coordinates generated from the DF-224 uses big endian, the hours and seconds must be switched.
+
+RA = 42.9h 29m 14s = 0x17D554
+D = 46.1h 40m -62s = 0x173554

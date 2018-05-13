@@ -1,0 +1,39 @@
+time ./aRead 1
+1
+
+real	0m0.013s
+user	0m0.011s
+sys	0m0.002s
+
+time ./aRead 10
+71
+
+real	0m0.014s
+user	0m0.011s
+sys	0m0.002s
+
+time ./aRead 100
+1466043
+
+real	0m0.015s
+user	0m0.012s
+sys	0m0.003s
+
+time ./aRead 1000
+2463576363942
+
+real	0m0.016s
+user	0m0.011s
+sys	0m0.003s
+
+time ./aRead 100000
+43336006473246280
+
+real	0m0.192s
+user	0m0.069s
+sys	0m0.117s
+
+
+OBSERVATION: running time grows significantly slower than sRead when numBlocks is increasing.
+
+EXPLANATION: the CPU no longer has to schedule a single read, wait for that read to finish, and handle the read. Rather, all reads are scheduled in run() in a parallel fashion, and pending reads are enqueued. Whenever a read finishes, the CPU is interrupted (thus making the code asynchronous), the pending read is dequeued, and read is handled accordingly. Therefore, the CPU is not executing a single read at a time, resulting in a much slower runtime growth.

@@ -1,0 +1,31 @@
+time ./sRead 1
+1
+
+real	0m0.017s
+user	0m0.010s
+sys	0m0.002s
+
+time ./sRead 10
+71
+
+real	0m0.113s
+user	0m0.104s
+sys	0m0.004s
+
+time ./sRead 100
+1466043
+
+real	0m1.096s
+user	0m1.068s
+sys	0m0.016s
+
+time ./sRead 1000
+2463576363942
+
+real	0m10.866s
+user	0m10.465s
+sys	0m0.163s
+
+OBSERVATION: the runtime increases linearly with number of blocks inputted. For every factor of 10 numBlocks is increased by, the runtime is increased by the same factor.
+
+EXPLANATION: in run(), every time a disk read is scheduled, the disk waits until the read has been completed before handling it. Thus only one read is done at a time, resulting in linear time.
